@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MicroOrm.Pocos.SqlGenerator</id>
+    <version>1.0.0.0</version>
+    <title>MicroOrm.Pocos.SqlGenerator</title>
+    <authors>Diego Garcia</authors>
+    <owners>Diego Garcia</owners>
+    <projectUrl>https://github.com/Yoinbol/MicroOrm.Pocos.SqlGenerator</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Tool for auto generation of CRUD sql statements based on entities definitions</description>
+    <releaseNotes />
+    <tags>Micro-ORM Dapper OrmLite SQL</tags>
+  </metadata>
+</package>
