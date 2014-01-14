@@ -6,10 +6,10 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>https://github.com/Yoinbol/AutoProxy</projectUrl>
+    <projectUrl>https://github.com/Yoinbol/Dapper.DataRepositories</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <tags>Micro-ORM Dapper DesignPatterns RepositoryPattern</tags>
+    <tags>Micro-ORM Dapper DesignPatterns RepositoryPattern .NET</tags>
     <releaseNotes></releaseNotes>
   </metadata>
 </package>

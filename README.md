@@ -1,8 +1,8 @@
 Dapper.DataRepositories
 =======================
-There are some pretty cool stuff happening out there: Micro ORMs like [Dapper](https://code.google.com/p/dapper-dot-net/), [Repository Pattern](http://msdn.microsoft.com/en-us/library/ff649690.aspx) as nice and usefull option and [async programming](http://msdn.microsoft.com/en-us/library/hh191443.aspx). This package combines them and lets you to implement the repository pattern easily and fast.  
+There is some pretty cool stuff happening out there: Micro ORMs like [Dapper](https://code.google.com/p/dapper-dot-net/), [Repository Pattern](http://msdn.microsoft.com/en-us/library/ff649690.aspx) as nice and usefull option to implement data layers and [async programming](http://msdn.microsoft.com/en-us/library/hh191443.aspx) as a way to improve the performance of our code. This package combines them and lets you to implement the repository pattern easily and fast.  
 
-This package contains 3 elements:
+This package contains 3 components:
 
 * DataConnection: It's just a database connection wrapper. It could be useful for your no conventional data repositories, especially for those that does not needs to implement all CRUD operations. It will be the base class for all the data repositories directly or indirectly.
 * IDataRepository: the contract base for the data repositories that needs to implement CRUD operations (and more). 
@@ -11,7 +11,7 @@ This package contains 3 elements:
 
 How do I use those things?
 --------------------------
-Lets say you have this POCO entity:
+Lets say we have this POCO definition:
 
     [StoredAs("Users")]
     public class User
@@ -28,6 +28,8 @@ Lets say you have this POCO entity:
 		public string LastName { get; set; }
 		
 		public string Email { get; set; }
+		
+		public DateTime DateOfBirth { get; set; }
 		
 		[StatusProperty]
 		public UserStatus Status { get; set; }
@@ -52,13 +54,15 @@ Lets say you have this POCO entity:
 		Inactive = 3
 	}
 
-Using the elements, you only need to do a couple of things in order to create a data repository for this "User" POCO.  
+NOTE: for more information about how to define the metadata of your POCO's check the [MicroOrm.Pocos.SqlGenerator](https://github.com/Yoinbol/MicroOrm.Pocos.SqlGenerator) package.  
+
+Using the elements of this package, you only need to do a couple of things in order to create a data repository for this "User" POCO.  
 
 First, create the repository contract inheriting from IDataRepository:
 
     public interface IUsersRepository : IDataRepository<User>
     {
-        //IUsersRepository is inheriting CRUD operations 
+        //IUsersRepository is inheriting all CRUD operations 
     }
     
 Then, implements the repository:
@@ -99,8 +103,12 @@ Simple as that, we have defined a fully functional data repository for the "User
     
     Task<bool> DeleteAsync(object key);
 
-No SQL. No repeated code. Three pretty basic steps: decorate your POCOs, create your repository contracts and create your repositories.  
-All those functions are virtual at DataRepository level so you can easily override their behavior. Lets say you have your heavy custom stored procedure to insert users called "sp_AddUser", so you can easily use it by overriden the "Insert" function at repository level, like this:
+No SQL. No repeated code. Three pretty basic steps:
+* Decorate your POCO's
+* Define your repository contracts
+* Implement your repositories.  
+
+All those functions are virtual at DataRepository level so you can easily override them. Lets say we have a heavy custom stored procedure to insert users called "sp_AddUser". If we want to use that stored procedure, we only need to overwrite the "Insert" function at repository level, like this:
 
     public class UsersRepository : DataRepository<User>, IUsersRepository
     {
@@ -118,7 +126,7 @@ All those functions are virtual at DataRepository level so you can easily overri
         }
     }
 
-And what if I want to handle more function rather CRUD operations? Easy, define them at repository contract level and implement them at repository level, like this:
+And what if I want to handle more functions rather than CRUD operations? Easy, define them at repository contract level and implement them at repository level, like this:
 
     //Repository contract
     public interface IUsersRepository : IDataRepository<User>
@@ -141,3 +149,45 @@ And what if I want to handle more function rather CRUD operations? Easy, define 
             return Connection.Query<User>("sp_GetOlderUser", commandType: CommandType.StoredProcedure).FirstOrDefault();
         }
     }
+	
+Don't want/need all CRUD operations?
+------------------------------------
+
+There are some situations when we don't need all CRUD operations. If that' the case, we only need to do a couple of variants:
+
+* Don't inherit from IDataRepository at repository contract level and include in it only the operations that you need
+* Inherit from DataConnection instead of DataRepository at repository implementation level
+
+Example:
+
+	//POCO definition
+	[StoredAs("EventLogs")]
+    public class EventLog
+	{
+		[KeyProperty(Identity = true)]
+		public long Id { get; set; }
+		
+		public string Description { get; set;}
+		
+		public DateTime AddedOn { get; set; }
+	}
+	
+	//Repository contract definition
+	public interface IEventLogsRepository
+	{
+		void Insert(EventLog instance);
+	}
+	
+	//Repository implementation
+	public class EventLogsRepository : DataConnection
+	{
+		public EventLogsRepository(IDbConnection connection)
+			: base(connection)
+		{
+		}
+		
+		public void Insert(EventLog instance)
+		{
+			...
+		}
+	}
