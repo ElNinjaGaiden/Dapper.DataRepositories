@@ -34,8 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Dapper-Async.1.03\lib\net45\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="MicroOrm.Pocos.SqlGenerator">
-      <HintPath>..\packages\MicroOrm.Pocos.SqlGenerator.1.0.0.0\lib\net45\MicroOrm.Pocos.SqlGenerator.dll</HintPath>
+    <Reference Include="MicroOrm.Pocos.SqlGenerator, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MicroOrm.Pocos.SqlGenerator.1.0.0.1\lib\net45\MicroOrm.Pocos.SqlGenerator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
