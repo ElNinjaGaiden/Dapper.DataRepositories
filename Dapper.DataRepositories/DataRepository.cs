@@ -198,7 +198,7 @@ namespace Dapper.DataRepositories
             var sql = SqlGenerator.GetDelete();
             Task<IEnumerable<int>> queryTask = Connection.QueryAsync<int>(sql, key);
             IEnumerable<int> result = await queryTask;
-            return result.Single() > 0;
+            return result.SingleOrDefault() > 0;
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace Dapper.DataRepositories
             var sql = SqlGenerator.GetUpdate();
             Task<IEnumerable<int>> queryTask = Connection.QueryAsync<int>(sql, instance);
             IEnumerable<int> result = await queryTask;
-            return result.Single() > 0;
+            return result.SingleOrDefault() > 0;
         }
 
         #endregion
