@@ -54,7 +54,7 @@ Lets say we have this POCO definition:
 		Inactive = 3
 	}
 
-NOTE: for more information about how to define the metadata of your POCO's check the [MicroOrm.Pocos.SqlGenerator](https://github.com/Yoinbol/MicroOrm.Pocos.SqlGenerator) package.  
+NOTE: for more information about how to define the metadata of your POCO's check the [MicroOrm.Pocos.SqlGenerator](https://github.com/ElNinjaGaiden/MicroOrm.Pocos.SqlGenerator) package.  
 
 Using the elements of this package, you only need to do a couple of things in order to create a data repository for this "User" POCO.  
 

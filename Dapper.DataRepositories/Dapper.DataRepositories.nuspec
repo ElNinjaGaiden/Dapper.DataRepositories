@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>https://github.com/Yoinbol/Dapper.DataRepositories</projectUrl>
+    <projectUrl>https://github.com/ElNinjaGaiden/Dapper.DataRepositories</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>Micro-ORM Dapper DesignPatterns RepositoryPattern .NET</tags>
