@@ -1,3 +1,4 @@
+=======================
 Dapper.DataRepositories
 =======================
 There is some pretty cool stuff happening out there: Micro ORMs like [Dapper](https://code.google.com/p/dapper-dot-net/), [Repository Pattern](http://msdn.microsoft.com/en-us/library/ff649690.aspx) as nice and usefull option to implement data layers and [async programming](http://msdn.microsoft.com/en-us/library/hh191443.aspx) as a way to improve the performance of our code. This package combines them and lets you to implement the repository pattern easily and fast.  
